@@ -1,33 +1,31 @@
-// const { emailTemplate } = require('./js-foundation/01-template.js')
-// require('./js-foundation/02-destructuring')
-// const { getUserById } = require('./js-foundation/03-callbacks.js')
-// const { getUserById } = require('./js-foundation/04-arrow')
-// const { getId, getAge } = require('./plugins/index')
+const { getAge, getUUID } = require('./plugins')
+
+// const { emailTemplate } = require('./js-foundation/01-template');
+// require('./js-foundation/02-destructuring');
+// const { getUserById } = require('./js-foundation/03-callbacks');
+// const { getUserById } = require('./js-foundation/04-arrow');
 // const { buildMakePerson } = require('./js-foundation/05-factory')
-// console.log(emailTemplate)
-// const id = 1
-// getUserById(id, (error, user) => {
-//   if (error) {
-//     throw new Error(error)
-//   }
-//   console.log(user)
-// })
+// const getPokemonById = require('./js-foundation/06-promises')
+const { buildLogger } = require('./plugins')
 
-// const makePerson = buildMakePerson({
-//   getAge,
-//   getId
-// })
+const logger = buildLogger('app.js')
 
-// const obj = {
-//   name: 'Valentin Zalazar',
-//   birthdate: '1994-09-11'
-// }
+logger.log('Hola mundo')
+logger.error('Upss... algo salio mal!')
 
-// const valen = makePerson(obj)
-// console.log(valen)
+// getPokemonById(4)
+//   .then((pokemon) => console.log({ pokemon }))
+//   .catch((err) => console.log(err))
+//   .finally(() => console.log('Finalmente'))
 
-// Lo de arriba es fuction factory y uso
+// token de acceso
+// Publicas
 
-const getPokemonById = require('./js-foundation/06-promises')
+// ! Referencia a la función factory y uso
+// const makePerson = buildMakePerson({ getUUID, getAge });
 
-console.log(getPokemonById(1))
+// const obj = { name: 'John', birthdate: '1985-10-21' };
+
+// const john = makePerson( obj );
+
+// console.log({ john });
