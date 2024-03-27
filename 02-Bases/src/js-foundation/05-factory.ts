@@ -1,19 +1,32 @@
-const { http } = require('../plugins')
-
-export const getPokemonById = async (id: string | number): Promise<string> => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-
-  const pokemon = await http.get(url)
-
-  // const resp = await fetch( url );
-  // const pokemon = await resp.json();
-
-  // throw new Error('Pokemon no existe');
-
-  return pokemon.name
-
-  // return fetch( url )
-  //   .then( ( resp ) => resp.json())
-  // .then( () => { throw new Error('Pokemon no existe') })
-  //   .then( ( pokemon ) => pokemon.name );
+// const { getUUID } = require('../plugins/get-id.plugin');
+// const { getAge } = require('../plugins/get-age.plugin');
+// const { getAge, getUUID } = require('../plugins');
+interface BuildMakerPersonOptions {
+  getUUID: () => string
+  getAge: (birthdate: string) => number
 }
+
+interface PersonOptions {
+  name: string
+  birthdate: string
+}
+
+export const buildMakePerson = ({
+  getAge,
+  getUUID
+}: BuildMakerPersonOptions) => {
+  return ({ name, birthdate }: PersonOptions) => {
+    return {
+      id: getUUID(),
+      name: name,
+      birthdate: birthdate,
+      age: getAge(birthdate)
+    }
+  }
+}
+
+// const obj = { name: 'John', birthdate: '1985-10-21' };
+
+// const john = buildPerson( obj );
+
+// console.log(john);
