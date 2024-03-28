@@ -1,23 +1,36 @@
-import fs from 'fs'
-import { yarg } from './config/plugins/args.plugin'
+import { CreateTable } from './domain/use-cases/create-table.use-case'
+import { SaveFile } from './domain/use-cases/save-file.use-case'
 
-// Fernando desestructura el yarg con "const {base, limit, show} = yarg" y hace lo mismo que hice.
-
-let outputMessage = ''
-const base = yarg.b
-const headerMessage = `
-==================================
-        Tabla del ${base}
-==================================\n
-`
-for (let i = 1; i <= yarg.l; i++) {
-  outputMessage += `${base} x ${i} = ${base * i}\n`
+interface RunOptions {
+  base: number
+  limit: number
+  showTable: boolean
+  fileDestination: string
+  fileName: string
 }
-outputMessage = headerMessage + outputMessage
-console.log(yarg.s && outputMessage)
 
-const outputPath = 'outputs'
+export class ServerApp {
+  static run({
+    base,
+    limit,
+    showTable,
+    fileDestination,
+    fileName
+  }: RunOptions) {
+    console.log('Server running...')
 
-fs.mkdirSync(outputPath, { recursive: true })
+    const table = new CreateTable().execute({ base, limit })
 
-fs.writeFileSync(`${outputPath}/tabla-${base}.txt`, outputMessage)
+    const wasCreated = new SaveFile().execute({
+      fileContent: table,
+      fileDestination: fileDestination,
+      fileName: fileName
+    })
+
+    if (showTable) console.log(table)
+
+    wasCreated
+      ? console.log('File created!')
+      : console.error('File not created!')
+  }
+}
