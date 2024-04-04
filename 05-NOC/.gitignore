@@ -5,3 +5,6 @@ outputs/
 custom-outputs/
 test-destination/
 coverage/
+
+logs/
+.env
