@@ -1,6 +1,6 @@
 import { log } from "console"
 import { MongoDatabase, LogModel } from "./data/mongo"
-import { envs } from "./plugins/envs.plugin"
+import { envs } from "./config/plugins/envs.plugin"
 import { Server } from "./presentation/server"
 import { PrismaClient, SeverityLevel } from "@prisma/client"
 

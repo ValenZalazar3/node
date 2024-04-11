@@ -6,7 +6,7 @@ import { FileSystemDatasource } from "../infrastructure/datasources/file-system.
 import { MongoLogDatasource } from "../infrastructure/datasources/mongo-log.datasource";
 import { PostgresLogDatasource } from "../infrastructure/datasources/postgres-log.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository.impl";
-import { envs } from "../plugins/envs.plugin";
+import { envs } from "../config/plugins/envs.plugin";
 import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
 
