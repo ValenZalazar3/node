@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import path from 'path'
+import compression from 'compression'
 
 interface Options {
     port: number;
@@ -29,6 +30,7 @@ export class Server {
         //* Middlewares ==> te ayuda para el create.
         this.app.use(express.json()); // raw 
         this.app.use(express.urlencoded({ extended: true })) // x-www-form-urlencode
+        this.app.use(compression()) // para comprimir las respuestas y hacer mas eficiente por ende mas rapida la app
 
         //* Public Folder
         this.app.use(express.static(this.public_path))
