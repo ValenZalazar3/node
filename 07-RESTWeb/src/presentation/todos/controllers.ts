@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { CreateTodoDto, UpdateTodoDto } from "../../domain/dtos"
-import { TodoRepository } from "../../domain"
+import { GetTodo, GetTodos, TodoRepository } from "../../domain"
 
 
 
@@ -12,19 +12,21 @@ export class TodosController {
         private readonly todoRepository: TodoRepository,
     ) { }
 
-    public getTodos = async (req: Request, res: Response) => {
-        const todos = await this.todoRepository.getAll();
-        return res.json(todos);
+    public getTodos = (req: Request, res: Response) => {
+        new GetTodos(this.todoRepository)
+            .execute()
+            .then(todos => res.json(todos))
+            .catch(error => res.status(400).json({ error }))
     }
 
-    public getTodoById = async (req: Request, res: Response) => {
+    public getTodoById = (req: Request, res: Response) => {
         const id = +req.params.id;
-        try {
-            const todo = await this.todoRepository.findById(id)
-            return res.status(200).json(todo)
-        } catch (error) {
-            return res.status(400).json({ error })
-        }
+
+        new GetTodo(this.todoRepository)
+            .execute(id)
+            .then(todo => res.json(todo))
+            .catch(error => res.status(400).json({ error }))
+
     }
 
     public createTodo = async (req: Request, res: Response) => {
