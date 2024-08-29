@@ -26,7 +26,6 @@ export class TodosController {
             .execute(id)
             .then(todo => res.json(todo))
             .catch(error => res.status(400).json({ error }))
-
     }
 
     public createTodo = (req: Request, res: Response) => {

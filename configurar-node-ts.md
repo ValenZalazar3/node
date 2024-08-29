@@ -15,3 +15,11 @@ npx tsc --init --outDir dist/ --rootDir src
   "build": "rimraf ./dist && tsc",
   "start": "npm run build && node dist/app.js"
 ```
+4. Levantar docker una vez hecho el archivo "docker-compose.yml"
+```
+docker compose up -d
+```
+5. Instalar prisma
+```
+ npm install prisma --save-dev   //  npx prisma init --datasource-provider postgres
+```
