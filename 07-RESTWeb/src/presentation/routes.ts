@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { TodoRoutes } from "./todos/routes";
 
-
+//rutas de app
 export class AppRoutes {
 
     static get routes(): Router {
